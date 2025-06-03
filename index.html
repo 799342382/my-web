@@ -1,54 +1,41 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 工具站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI工具网页</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #121212;
+      background-color: #121212;
       color: #fff;
     }
     header {
+      background: #1f1f1f;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      background: #1f1f1f;
       position: sticky;
       top: 0;
       z-index: 10;
     }
     nav a {
-      margin: 0 1rem;
       color: #fff;
+      margin: 0 1rem;
       text-decoration: none;
       font-weight: bold;
     }
-    .search-container {
-      position: relative;
-    }
-    .search-box {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 40px;
-    }
-    .search-box input {
-      padding: 0.5rem;
-      border: none;
-      border-radius: 5px;
-    }
     .section {
+      display: none;
       padding: 2rem;
       max-width: 800px;
       margin: auto;
     }
-    .hidden {
-      display: none;
+    .active {
+      display: block;
     }
     .button {
       background: #00c8ff;
@@ -57,118 +44,138 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 1rem;
-    }
-    input[type="text"], input[type="password"] {
-      padding: 0.5rem;
       margin: 0.5rem 0;
+    }
+    input {
+      padding: 0.5rem;
+      margin: 0.3rem 0;
       width: 100%;
       max-width: 300px;
       border-radius: 5px;
       border: none;
     }
-    .link-list a {
-      display: block;
+    .link-item {
       margin: 0.5rem 0;
+    }
+    .link-item a {
       color: #00c8ff;
       text-decoration: underline;
+      margin-right: 1rem;
+    }
+    .link-item button {
+      background: red;
+      border: none;
+      color: white;
+      padding: 0.2rem 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
   <header>
-    <div><strong>AI 工具站</strong></div>
+    <strong>AI 工具页</strong>
     <nav>
-      <a href="#home">首页</a>
-      <a href="#links">链接</a>
-      <a href="#settings">设置</a>
+      <a href="#" onclick="showSection('home')">首页</a>
+      <a href="#" onclick="showSection('links')">链接</a>
+      <a href="#" onclick="showSection('settings')">设置</a>
     </nav>
-    <div class="search-container">
-      <button onclick="toggleSearch()">🔍</button>
-      <div class="search-box" id="searchBox">
-        <input type="text" placeholder="搜索..." oninput="searchLinks(this.value)" />
-      </div>
-    </div>
   </header>
 
-  <div class="section" id="home">
+  <div id="home" class="section active">
     <h2>欢迎访问</h2>
-    <p>这是一个聚合AI资源与工具的平台，支持链接跳转与创作者权限管理。</p>
+    <p>这是一个聚合AI资源与工具的网页，普通用户无需登录即可浏览链接。</p>
   </div>
 
-  <div class="section" id="links">
-    <h2>链接区域</h2>
-    <div id="linkList" class="link-list">
-      <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
-      <a href="https://gemini.google.com" target="_blank">Gemini</a>
-    </div>
-    <div id="linkEditor" class="hidden">
-      <input type="text" id="newLinkText" placeholder="链接名称" />
-      <input type="text" id="newLinkURL" placeholder="https://..." />
+  <div id="links" class="section">
+    <h2>链接列表</h2>
+    <div id="linkList"></div>
+    <div id="linkEditor" style="display:none;">
+      <input type="text" id="linkName" placeholder="链接名称">
+      <input type="text" id="linkURL" placeholder="https://...">
       <button class="button" onclick="addLink()">添加链接</button>
     </div>
   </div>
 
-  <div class="section" id="settings">
-    <h2>设置</h2>
+  <div id="settings" class="section">
+    <h2>创作者登录</h2>
     <div id="loginForm">
-      <input type="text" id="loginUser" placeholder="账号" />
-      <input type="password" id="loginPass" placeholder="密码" />
+      <input type="text" id="username" placeholder="账号">
+      <input type="password" id="password" placeholder="密码">
       <button class="button" onclick="login()">登录</button>
     </div>
-    <div id="creatorSettings" class="hidden">
-      <p>欢迎，创作者！你现在可以修改链接或添加内容。</p>
+    <div id="logoutSection" style="display:none;">
+      <p>你已登录为创作者。</p>
+      <button class="button" onclick="logout()">退出登录</button>
     </div>
   </div>
 
   <script>
-    function toggleSearch() {
-      const box = document.getElementById('searchBox');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    const linksKey = "customLinks";
+    const creatorKey = "isCreator";
+
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
 
-    function searchLinks(keyword) {
-      const links = document.querySelectorAll('#linkList a');
-      links.forEach(link => {
-        link.style.display = link.textContent.toLowerCase().includes(keyword.toLowerCase()) ? 'block' : 'none';
+    function loadLinks() {
+      const list = document.getElementById("linkList");
+      list.innerHTML = "";
+      const links = JSON.parse(localStorage.getItem(linksKey) || "[]");
+      links.forEach((link, index) => {
+        const div = document.createElement("div");
+        div.className = "link-item";
+        div.innerHTML = `<a href="${link.url}" target="_blank">${link.name}</a>` +
+          (localStorage.getItem(creatorKey) ? `<button onclick="deleteLink(${index})">删除</button>` : "");
+        list.appendChild(div);
       });
     }
 
-    function login() {
-      const user = document.getElementById('loginUser').value;
-      const pass = document.getElementById('loginPass').value;
-      if (user === '799342382' && pass === '15934345873') {
-        localStorage.setItem('isCreator', 'true');
-        showCreatorFeatures();
-      } else {
-        alert('账号或密码错误');
-      }
-    }
-
-    function showCreatorFeatures() {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('creatorSettings').classList.remove('hidden');
-      document.getElementById('linkEditor').classList.remove('hidden');
-    }
-
     function addLink() {
-      const text = document.getElementById('newLinkText').value;
-      const url = document.getElementById('newLinkURL').value;
-      if (!text || !url) return alert('请输入完整信息');
-      const a = document.createElement('a');
-      a.href = url;
-      a.target = "_blank";
-      a.textContent = text;
-      document.getElementById('linkList').appendChild(a);
-      document.getElementById('newLinkText').value = '';
-      document.getElementById('newLinkURL').value = '';
+      const name = document.getElementById("linkName").value;
+      const url = document.getElementById("linkURL").value;
+      if (!name || !url) return alert("请输入名称和链接");
+      const links = JSON.parse(localStorage.getItem(linksKey) || "[]");
+      links.push({ name, url });
+      localStorage.setItem(linksKey, JSON.stringify(links));
+      document.getElementById("linkName").value = "";
+      document.getElementById("linkURL").value = "";
+      loadLinks();
     }
 
-    window.onload = function () {
-      if (localStorage.getItem('isCreator') === 'true') {
-        showCreatorFeatures();
+    function deleteLink(index) {
+      const links = JSON.parse(localStorage.getItem(linksKey) || "[]");
+      links.splice(index, 1);
+      localStorage.setItem(linksKey, JSON.stringify(links));
+      loadLinks();
+    }
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if (user === "799342382" && pass === "15934345873") {
+        localStorage.setItem(creatorKey, "true");
+        updateAuthUI();
+      } else {
+        alert("账号或密码错误");
       }
     }
+
+    function logout() {
+      localStorage.removeItem(creatorKey);
+      updateAuthUI();
+    }
+
+    function updateAuthUI() {
+      const isCreator = localStorage.getItem(creatorKey);
+      document.getElementById("linkEditor").style.display = isCreator ? "block" : "none";
+      document.getElementById("loginForm").style.display = isCreator ? "none" : "block";
+      document.getElementById("logoutSection").style.display = isCreator ? "block" : "none";
+      loadLinks();
+    }
+
+    window.onload = updateAuthUI;
   </script>
 </body>
 </html>
