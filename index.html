@@ -1,11 +1,167 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>我的网页</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 工具聚合页</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .section {
+      margin: 2rem 0;
+      width: 90%;
+      max-width: 800px;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 1rem;
+      background-color: #00c853;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .button:hover {
+      background-color: #00a842;
+    }
+    video, audio {
+      width: 100%;
+      margin-top: 1rem;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+    .dark-toggle {
+      cursor: pointer;
+      margin-top: 2rem;
+      color: #00e5ff;
+    }
+  </style>
 </head>
 <body>
-  <h1>欢迎来到我的网页</h1>
-  <p>这是一个空页面，你可以随时加入功能</p>
+  <h1>🌌 AI 工具聚合页 · 科技风</h1>
+
+  <div class="section">
+    <h2>📦 文件下载</h2>
+    <a class="button" href="https://example.com/file.apk">点击下载 APK</a>
+  </div>
+
+  <div class="section">
+    <h2>🎬 视频播放器</h2>
+    <video controls>
+      <source src="https://example.com/video.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="section">
+    <h2>🎧 音乐播放器</h2>
+    <audio controls>
+      <source src="https://example.com/audio.mp3" type="audio/mpeg" />
+      Your browser does not support the audio tag.
+    </audio>
+  </div>
+
+  <div class="section">
+    <h2>📝 提交表单</h2>
+    <form>
+      <input type="text" placeholder="输入你的姓名" /><br />
+      <textarea placeholder="输入你的建议"></textarea><br />
+      <button class="button" type="submit">提交</button>
+    </form>
+  </div>
+
+  <div class="section">
+    <h2>🖼 图片展示</h2>
+    <img src="https://picsum.photos/600/300" alt="科技图" />
+  </div>
+
+  <div class="section">
+    <h2>🗣 网页朗读器</h2>
+    <textarea id="ttsText">你好，欢迎访问AI工具网站！</textarea>
+    <button class="button" onclick="readText()">点击朗读</button>
+  </div>
+
+  <div class="section">
+    <h2>💬 弹窗提示</h2>
+    <button class="button" onclick="alert('你好，这是弹窗！')">显示弹窗</button>
+  </div>
+
+  <div class="section">
+    <h2>📨 联系方式</h2>
+    <p>微信号：yourwechat123</p>
+    <p>邮箱：you@example.com</p>
+  </div>
+
+  <div class="section">
+    <h2>📝 简单记事本</h2>
+    <textarea id="noteBox" placeholder="在此记录点什么..."></textarea>
+    <button class="button" onclick="saveNote()">保存</button>
+    <button class="button" onclick="clearNote()">清空</button>
+  </div>
+
+  <div class="section">
+    <h2>⏱ 当前时间</h2>
+    <p id="time"></p>
+  </div>
+
+  <div class="dark-toggle" onclick="toggleDark()">🌓 切换夜间模式</div>
+
+  <script>
+    function readText() {
+      const msg = new SpeechSynthesisUtterance(document.getElementById('ttsText').value);
+      window.speechSynthesis.speak(msg);
+    }
+
+    function saveNote() {
+      localStorage.setItem('note', document.getElementById('noteBox').value);
+      alert('已保存！');
+    }
+    function clearNote() {
+      document.getElementById('noteBox').value = '';
+      localStorage.removeItem('note');
+    }
+    document.getElementById('noteBox').value = localStorage.getItem('note') || '';
+
+    function toggleDark() {
+      document.body.style.background = document.body.style.background.includes('0f2027')
+        ? '#ffffff'
+        : 'linear-gradient(to right, #0f2027, #203a43, #2c5364)';
+      document.body.style.color = document.body.style.color === 'white' ? 'black' : 'white';
+    }
+
+    function updateTime() {
+      document.getElementById('time').textContent = new Date().toLocaleString();
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
 </body>
 </html>
