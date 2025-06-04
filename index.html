@@ -9,8 +9,25 @@
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #121212;
-      color: #fff;
+      color: #fff; }
+
+    header nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1rem;
     }
+    nav a {
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
 
     header nav {
       display: flex;
@@ -85,7 +102,7 @@
 </head>
 <body>
   <header>
-    <strong>AI 工具页</strong>
+    
     <nav>
       <a href="#" onclick="showSection('home')">首页</a>
       <a href="#" onclick="showSection('videos')">影视区</a>
