@@ -1,22 +1,22 @@
-
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>AI工具网页 - 精简增强版</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
+<meta charset="utf-8"/>
+<title>AI工具网页 - 精简增强版</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
+      background-color: #FFC0CB; /* Soft pink background color */
       color: #fff;
     }
     .bottom-nav {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background: #1f1f1f;
+      background: #A0D8EF;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -56,7 +56,8 @@
       background: rgba(255,255,255,0.15);
     }
     header {
-      background: #1f1f1f;
+  background: #A0D8EF;
+      background: #A0D8EF;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -91,16 +92,22 @@
       margin: 1rem 0 2rem 0;
     }
     .card {
-      background-color: #1f1f1f;
-      padding: 1rem;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-    .card a {
-      color: #00c8ff;
-      text-decoration: none;
-    }
+  background-color: #fff0f5; /* 淡粉紫，适配粉色背景 */
+  color: #333;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card a {
+  color: #007BFF; /* 清新蓝色链接 */
+  text-decoration: none;
+  font-weight: bold;
+}
     #resourceSearch {
       width: 100%;
       padding: 0.5rem;
@@ -109,35 +116,29 @@
       margin-bottom: 1rem;
       font-size: 16px;
     }
-    .resource a {
-      color: #00c8ff;
-      text-decoration: none;
-    }
-  </style>
+    .resource a { font-size: 1.1rem; color: #ff6600; }
+  
+.resource a { font-size: 1.1rem; color: #ff6600; }</style>
 </head>
 <body>
-  <div class="page-content"></div> <!-- end page-content -->
-  <footer class="bottom-nav">
-    <a onclick="showSection('home')">首页</a>
-    <a onclick="showSection('functions')">功能</a>
-    <a onclick="showSection('videos')">影视</a>
-    <a onclick="showSection('resources')">资源</a>
-    <a onclick="showSection('notes')">我的</a>
-  </footer>
-
-  <div id="home" class="section active">
-    <div class="notification-bar" style="background-color: #f44336; color: white; text-align: center; padding: 0.5rem;">
-      有些功能不能用，在电脑就可以打开了
-    </div>
-    <div style="margin: 2rem 0; text-align: center;">
-      <div class="vip-card">
-        <div class="sparkle">✨</div>
-        👑 至尊永久会员 👑<br>
-        <span style="font-size: 0.9rem;">尊贵身份 · 永久有效</span>
-      </div>
-    </div>
-    <div style="text-align: center; margin-top: 1rem;">
-      <button onclick="addBookmark()" style="
+<div class="page-content"></div> <!-- end page-content -->
+<footer class="bottom-nav">
+<a onclick="showSection('home')">首页</a>
+<a onclick="showSection('functions')">功能</a>
+<a onclick="showSection('videos')">影视</a>
+<a onclick="showSection('resources')">资源</a>
+<a onclick="showSection('notes')">我的</a>
+</footer>
+<div class="section active" id="home">
+<div style="margin: 2rem 0; text-align: center;">
+<div class="vip-card">
+<div class="sparkle">✨</div>
+        👑 至尊永久会员 👑<br/>
+<span style="font-size: 0.9rem;">尊贵身份 · 永久有效</span>
+</div>
+</div>
+<div style="text-align: center; margin-top: 1rem;">
+<button onclick="addBookmark()" style="
         background: linear-gradient(45deg, gold, orange);
         border: none;
         border-radius: 10px;
@@ -148,9 +149,8 @@
         cursor: pointer;
         box-shadow: 0 0 10px gold;
       ">⭐ 收藏本站</button>
-    </div>
-
-    <script>
+</div>
+<script>
       function addBookmark() {
         const url = window.location.href;
         const title = document.title;
@@ -167,8 +167,7 @@
         }
       }
     </script>
-
-    <style>
+<style>
       .vip-card {
         display: inline-block;
         background: linear-gradient(135deg, #ffd700, #ffa500);
@@ -198,70 +197,67 @@
         to { transform: rotate(360deg); }
       }
     </style>
-  </div>
-
-  <div id="functions" class="section">
-    <h2>🛠️ 功能区</h2>
-    <div class="grid searchable">
-      <!-- 新添加的功能区 -->
-      <div class="card">
-        <div>万能链接解析下载神器</div>
-        <a href="https://snapany.com/zh" target="_blank">点击进入</a>
-      </div>
-    </div>
-  </div>
-
-  <div id="videos" class="section">
-    <h2>📽️ 影视平台</h2>
-    <div class="grid searchable">
-      <div class="card"><div>腾讯视频</div><a href="https://v.qq.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>爱奇艺</div><a href="https://www.iqiyi.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>优酷</div><a href="https://www.youku.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>哔哩哔哩</div><a href="https://www.bilibili.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>芒果TV</div><a href="https://www.mgtv.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>搜狐视频</div><a href="https://tv.sohu.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>PPTV</div><a href="https://www.pptv.com" target="_blank">点击进入</a></div>
-    </div>
-
-    <h2>🎬 短视频平台</h2>
-    <div class="grid searchable">
-      <div class="card"><div>抖音</div><a href="https://www.douyin.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>快手</div><a href="https://www.kuaishou.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>小红书</div><a href="https://www.xiaohongshu.com" target="_blank">点击进入</a></div>
-    </div>
-
-    <h2>🎥 短视频创作者中心</h2>
-    <div class="grid searchable">
-      <div class="card"><div>抖音创作者中心</div><a href="https://creator.douyin.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>视频号助手</div><a href="https://channels.weixin.qq.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>小红书创作服务平台</div><a href="https://creator.xiaohongshu.com" target="_blank">点击进入</a></div>
-      <div class="card"><div>快手创作者服务平台</div><a href="https://cp.kuaishou.com/profile" target="_blank">点击进入</a></div>
-    </div>
-  </div>
-
-  <div id="resources" class="section">
-    <h2>📁 资源</h2>
-    <input type="text" id="resourceSearch" placeholder="搜索你的资源关键词..." oninput="filterResources()">
-    <ul id="resourceList">
-      <li class="resource"><a href="https://app.1foo.com/install/10AD56" target="_blank">边界AI</a></li>
-      <li class="resource"><a href="https://github.com/799342382/AI/releases/download/V7.8/API.apk" target="_blank">实用软件黑科技</a></li>
-      <li class="resource"><a href="https://pan.quark.cn/s/252ee82b27e8#/list/share" target="_blank">科技插件</a></li>
-      <li class="resource"><a href="https://pan.quark.cn/s/bc1ac6a6bf7c#/list/share" target="_blank">安卓软件</a></li>
-      <li class="resource"><a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">摄影剪辑</a></li>
-      <li class="resource"><a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">媒体运营</a></li>
-      <li class="resource"><a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">去马赛克</a></li>
-      <li class="resource"><a href="https://kdocs.cn/l/clLbAxjyKcbr" target="_blank">短剧百度搜索</a></li>
-    </ul>
-  </div>
-
-  <div id="notes" class="section">
-    <h2>📝 我的</h2>
-    <textarea id="noteArea" rows="10" style="width:100%;font-size:16px;"></textarea>
-    <button onclick="saveNote()">💾 保存</button>
-    <button onclick="clearNote()">🗑️ 清空</button>
-  </div>
-
-  <script>
+</div>
+<div class="section" id="functions">
+<h2>🛠️ 功能区</h2>
+<div class="grid searchable">
+<!-- 新添加的功能区 -->
+<div class="card">
+<div>万能链接解析下载神器</div>
+<a href="https://snapany.com/zh" target="_blank">点击进入</a>
+</div>
+<div class="card">
+<div>开拍</div>
+<a href="https://www.kaipai.com/home" target="_blank">点击进入</a>
+</div>
+<div class="card"><div>ChatGPT网页版</div><a href="https://chat.openai.com" target="_blank">点击进入</a></div></div>
+</div>
+<div class="section" id="videos">
+<h2>📽️ 影视平台</h2>
+<div class="grid searchable">
+<div class="card"><div>腾讯视频</div><a href="https://v.qq.com" target="_blank">点击进入</a></div>
+<div class="card"><div>爱奇艺</div><a href="https://www.iqiyi.com" target="_blank">点击进入</a></div>
+<div class="card"><div>优酷</div><a href="https://www.youku.com" target="_blank">点击进入</a></div>
+<div class="card"><div>哔哩哔哩</div><a href="https://www.bilibili.com" target="_blank">点击进入</a></div>
+<div class="card"><div>芒果TV</div><a href="https://www.mgtv.com" target="_blank">点击进入</a></div>
+<div class="card"><div>搜狐视频</div><a href="https://tv.sohu.com" target="_blank">点击进入</a></div>
+<div class="card"><div>PPTV</div><a href="https://www.pptv.com" target="_blank">点击进入</a></div>
+</div>
+<h2>🎬 短视频平台</h2>
+<div class="grid searchable">
+<div class="card"><div>抖音</div><a href="https://www.douyin.com" target="_blank">点击进入</a></div>
+<div class="card"><div>快手</div><a href="https://www.kuaishou.com" target="_blank">点击进入</a></div>
+<div class="card"><div>小红书</div><a href="https://www.xiaohongshu.com" target="_blank">点击进入</a></div>
+</div>
+<h2>🎥 短视频创作者中心</h2>
+<div class="grid searchable">
+<div class="card"><div>抖音创作者中心</div><a href="https://creator.douyin.com" target="_blank">点击进入</a></div>
+<div class="card"><div>视频号助手</div><a href="https://channels.weixin.qq.com" target="_blank">点击进入</a></div>
+<div class="card"><div>小红书创作服务平台</div><a href="https://creator.xiaohongshu.com" target="_blank">点击进入</a></div>
+<div class="card"><div>快手创作者服务平台</div><a href="https://cp.kuaishou.com/profile" target="_blank">点击进入</a></div>
+</div>
+</div>
+<div class="section" id="resources">
+<h2>📁 资源</h2>
+<input id="resourceSearch" oninput="filterResources()" placeholder="搜索你的资源关键词..." type="text"/>
+<ul id="resourceList">
+<li class="resource"><a href="https://app.1foo.com/install/10AD56" target="_blank">边界AI</a></li>
+<li class="resource"><a href="https://github.com/799342382/AI/releases/download/V7.8/API.apk" target="_blank">实用软件黑科技</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/252ee82b27e8#/list/share" target="_blank">科技插件</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/bc1ac6a6bf7c#/list/share" target="_blank">安卓软件</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">摄影剪辑</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">媒体运营</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">去马赛克</a></li>
+<li class="resource"><a href="https://kdocs.cn/l/clLbAxjyKcbr" target="_blank">短剧百度搜索</a></li>
+</ul>
+</div>
+<div class="section" id="notes">
+<h2>📝 我的</h2>
+<textarea id="noteArea" rows="10" style="width:100%;font-size:16px;"></textarea>
+<button onclick="saveNote()">💾 保存</button>
+<button onclick="clearNote()">🗑️ 清空</button>
+</div>
+<script>
     function showSection(id) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
