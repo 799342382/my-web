@@ -8,20 +8,22 @@
 <style>
     body {
       margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #FFC0CB; /* Soft pink background color */
-      color: #fff;
+      background-color: #121212; /* 主色：深黑背景 */
+      color: #f5f5f5;
     }
     .bottom-nav {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background: #A0D8EF;
+      background: #2a2d3e;
       display: flex;
       justify-content: space-around;
       align-items: center;
       padding: 0.8rem 0;
-      border-top: 1px solid #333;
+      border-top: 1px solid #555;
       z-index: 1000;
     }
     .bottom-nav a {
@@ -56,8 +58,8 @@
       background: rgba(255,255,255,0.15);
     }
     header {
-  background: #A0D8EF;
-      background: #A0D8EF;
+  background: #2a2d3e;
+      background: #2a2d3e;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -82,6 +84,8 @@
       display: block;
     }
     h2 {
+      color: #00ccff;
+      font-size: 1.4rem;
       border-bottom: 2px solid #444;
       padding-bottom: 0.5rem;
     }
@@ -92,8 +96,8 @@
       margin: 1rem 0 2rem 0;
     }
     .card {
-  background-color: #fff0f5; /* 淡粉紫，适配粉色背景 */
-  color: #333;
+  background-color: #1a1a1a; /* 优化卡片深灰 */
+  color: #ffffff;
   padding: 1rem;
   border-radius: 12px;
   text-align: center;
@@ -104,7 +108,7 @@
   transform: translateY(-4px);
 }
 .card a {
-  color: #007BFF; /* 清新蓝色链接 */
+  color: #00ccff; /* 清新蓝色链接 */
   text-decoration: none;
   font-weight: bold;
 }
@@ -116,9 +120,9 @@
       margin-bottom: 1rem;
       font-size: 16px;
     }
-    .resource a { font-size: 1.1rem; color: #ff6600; }
+    .resource a { font-size: 1.1rem; color: #ffcc00; }
   
-.resource a { font-size: 1.1rem; color: #ff6600; }</style>
+.resource a { font-size: 1.1rem; color: #ffcc00; }</style>
 </head>
 <body>
 <div class="page-content"></div> <!-- end page-content -->
@@ -138,7 +142,7 @@
 </div>
 </div>
 <div style="text-align: center; margin-top: 1rem;">
-<button onclick="addBookmark()" style="
+<button onclick="smartBookmark()" style="
         background: linear-gradient(45deg, gold, orange);
         border: none;
         border-radius: 10px;
@@ -149,6 +153,18 @@
         cursor: pointer;
         box-shadow: 0 0 10px gold;
       ">⭐ 收藏本站</button>
+<div id="updateNotice" style="
+  margin-top: 1.5rem;
+  background: linear-gradient(45deg, #ff6600, #ffaa00);
+  color: black;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
+  text-align: center;
+">
+📢 功能更新：新增 Deepseek 下载技巧、即梦AI绘画入口优化、支持自动收藏提示等功能，欢迎体验！
+</div>
 </div>
 <script>
       function addBookmark() {
@@ -206,20 +222,28 @@
 <div>万能链接解析下载神器</div>
 <a href="https://snapany.com/zh" target="_blank">点击进入</a>
 </div>
+
+
+
+
+</div>
+<h2>🌐 网页区</h2>
+<div class="grid searchable">
+
+
 <div class="card">
 <div>开拍</div>
 <a href="https://www.kaipai.com/home" target="_blank">点击进入</a>
-</div>
-
-<div class="card">
-  <div>ChatGPT网页版</div>
-  <a href="https://chat.openai.com" target="_blank">点击进入</a>
-</div>
-<div class="card">
-  <div>即梦 AI 绘画</div>
-  <a href="https://jimeng.jianying.com/" target="_blank">点击进入</a>
-</div>
-</div>
+</div><div class="card">
+<div>百度网盘</div>
+<a href="https://pan.baidu.com/" target="_blank">点击进入</a>
+</div><div class="card">
+<div>ChatGPT网页版</div>
+<a href="https://chat.openai.com" target="_blank">点击进入</a>
+</div><div class="card">
+<div>即梦 AI 绘画</div>
+<a href="https://jimeng.jianying.com/" target="_blank">点击进入</a>
+</div></div>
 </div>
 <div class="section" id="videos">
 <h2>📽️ 影视平台</h2>
@@ -250,15 +274,15 @@
 <h2>📁 资源</h2>
 <input id="resourceSearch" oninput="filterResources()" placeholder="搜索你的资源关键词..." type="text"/>
 <ul id="resourceList">
-<li class="resource"><a href="https://app.1foo.com/install/10AD56" target="_blank">边界AI</a></li>
-<li class="resource"><a href="https://github.com/799342382/AI/releases/download/V7.8/API.apk" target="_blank">实用软件黑科技</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/252ee82b27e8#/list/share" target="_blank">科技插件</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/bc1ac6a6bf7c#/list/share" target="_blank">安卓软件</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">摄影剪辑</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">媒体运营</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">去马赛克</a></li>
-<li class="resource"><a href="https://kdocs.cn/l/clLbAxjyKcbr" target="_blank">短剧百度搜索</a></li>
-</ul>
+<li class="resource"><a href="https://app.1foo.com/install/10AD56" target="_blank">1. 边界AI</a></li>
+
+<li class="resource"><a href="https://pan.quark.cn/s/252ee82b27e8#/list/share" target="_blank">3. 科技插件</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/bc1ac6a6bf7c#/list/share" target="_blank">4. 安卓软件</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">5. 摄影剪辑</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">6. 媒体运营</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">7. 去马赛克</a></li>
+<li class="resource"><a href="https://kdocs.cn/l/clLbAxjyKcbr" target="_blank">8. 短剧百度搜索</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/32e2eef37133" target="_blank">9. 天当众说话</a></li><li class="resource"><a href="https://pan.quark.cn/s/bda448f2ed6a" target="_blank">10. 情绪自救课（含训练营）</a></li><li class="resource"><a href="https://github.com/799342382/mofa/releases/download/v1.0.0/mofa.apk" target="_blank">11. 本站有APP方便进入</a></li><li class="resource"><a href="https://pan.quark.cn/s/21d5a32c1006#/list/share" target="_blank">12. Deepseek保姆喂饭级使用技巧大全</a></li></ul>
 </div>
 <div class="section" id="notes">
 <h2>📝 我的</h2>
@@ -293,5 +317,23 @@
       document.getElementById("noteArea").value = localStorage.getItem("myNote") || "";
     }
   </script>
+<script>
+  function smartBookmark() {
+    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+    if (isMobile) {
+      alert("📱 请点击浏览器菜单栏 → 选择『添加书签』或『添加到主屏幕』");
+    } else {
+      try {
+        if (window.external && ('AddFavorite' in window.external)) {
+          window.external.AddFavorite(location.href, document.title);
+        } else {
+          alert("💻 请按 Ctrl+D (或 ⌘+D) 将本站添加到收藏夹");
+        }
+      } catch (e) {
+        alert("💻 请按 Ctrl+D (或 ⌘+D) 将本站添加到收藏夹");
+      }
+    }
+  }
+</script>
 </body>
 </html>
