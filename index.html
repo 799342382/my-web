@@ -123,7 +123,48 @@
     .resource a { font-size: 1.1rem; color: #ffcc00; }
   
 .resource a { font-size: 1.1rem; color: #ffcc00; }</style>
-</head>
+<style>
+  .login-panel {
+    padding: 2rem;
+    text-align: center;
+  }
+  .login-panel input {
+    padding: 0.5rem;
+    margin: 0.3rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+  }
+  .login-panel button {
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    background: gold;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: red;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+  }
+  .svip-card {
+    background: linear-gradient(135deg, #ff3cac, #784ba0);
+    box-shadow: 0 0 10px #ff3cac;
+    position: relative;
+  }
+  .creator-card {
+    background: linear-gradient(135deg, gold, orange);
+    box-shadow: 0 0 15px gold;
+    position: relative;
+  }
+</style></head>
 <body>
 <div class="page-content"></div> <!-- end page-content -->
 <footer class="bottom-nav">
@@ -163,7 +204,7 @@
   box-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
   text-align: center;
 ">
-📢 功能更新：新增 Deepseek 下载技巧、即梦AI绘画入口优化、支持自动收藏提示等功能，欢迎体验！
+📢 功能更新：新增 账号登录功能、区域的划分、支持自动收藏提示等功能，功能持续更新中，欢迎体验！
 </div>
 </div>
 <script>
@@ -222,15 +263,17 @@
 <div>万能链接解析下载神器</div>
 <a href="https://snapany.com/zh" target="_blank">点击进入</a>
 </div>
-
-
-
-
+<div class="card svip-only svip-card">
+<div>高级AI特权工具 <span class="badge">SVIP</span></div>
+<a href="https://www.example.com" target="_blank">点击进入</a>
+</div>
+<div class="card creator-only creator-card">
+<div>👑 创世神专属工具</div>
+<a href="https://www.example.com" target="_blank">点击进入</a>
+</div>
 </div>
 <h2>🌐 网页区</h2>
 <div class="grid searchable">
-
-
 <div class="card">
 <div>开拍</div>
 <a href="https://www.kaipai.com/home" target="_blank">点击进入</a>
@@ -275,16 +318,20 @@
 <input id="resourceSearch" oninput="filterResources()" placeholder="搜索你的资源关键词..." type="text"/>
 <ul id="resourceList">
 <li class="resource"><a href="https://app.1foo.com/install/10AD56" target="_blank">1. 边界AI</a></li>
-
-<li class="resource"><a href="https://pan.quark.cn/s/252ee82b27e8#/list/share" target="_blank">3. 科技插件</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/bc1ac6a6bf7c#/list/share" target="_blank">4. 安卓软件</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">5. 摄影剪辑</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">6. 媒体运营</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">7. 去马赛克</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/252ee82b27e8#/list/share" target="_blank">2. 科技插件</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/bc1ac6a6bf7c#/list/share" target="_blank">3. 安卓软件</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">4. 摄影剪辑</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">5. 媒体运营</a></li>
+<li class="resource"><a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">6. 去马赛克</a></li><li class="resource"><a href="https://github.com/799342382/mofa/releases/download/v1.0.0/mofa.apk" target="_blank">7. 本站有APP方便进入</a></li>
 <li class="resource"><a href="https://kdocs.cn/l/clLbAxjyKcbr" target="_blank">8. 短剧百度搜索</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/32e2eef37133" target="_blank">9. 天当众说话</a></li><li class="resource"><a href="https://pan.quark.cn/s/bda448f2ed6a" target="_blank">10. 情绪自救课（含训练营）</a></li><li class="resource"><a href="https://github.com/799342382/mofa/releases/download/v1.0.0/mofa.apk" target="_blank">11. 本站有APP方便进入</a></li><li class="resource"><a href="https://pan.quark.cn/s/21d5a32c1006#/list/share" target="_blank">12. Deepseek保姆喂饭级使用技巧大全</a></li></ul>
+<li class="resource"><a href="https://pan.quark.cn/s/32e2eef37133" target="_blank">9. 天当众说话</a></li><li class="resource"><a href="https://pan.quark.cn/s/bda448f2ed6a" target="_blank">10. 情绪自救课（含训练营）</a></li><li class="resource"><a href="https://pan.quark.cn/s/21d5a32c1006#/list/share" target="_blank">11. Deepseek保姆喂饭级使用技巧大全</a></li></ul>
 </div>
-<div class="section" id="notes">
+<div class="section" id="notes"><div class="login-panel">
+<h2>账号管理</h2>
+<p>当前账号：<span id="accountLevel">天使账号</span></p>
+<input id="passwordInput" placeholder="输入密码切换账号" type="password"/>
+<button onclick="switchAccount()">切换账号</button>
+</div>
 <h2>📝 我的</h2>
 <textarea id="noteArea" rows="10" style="width:100%;font-size:16px;"></textarea>
 <button onclick="saveNote()">💾 保存</button>
@@ -334,6 +381,44 @@
       }
     }
   }
+</script><script>
+let currentAccount = localStorage.getItem("accountLevel") || "天使账号";
+
+function switchAccount() {
+  const pwd = document.getElementById("passwordInput").value;
+  if (pwd === "520131419") {
+    currentAccount = "恶魔账号";
+  } else if (pwd === "15934345873") {
+    currentAccount = "创世神账号";
+  } else {
+    currentAccount = "天使账号";
+  }
+  document.getElementById("accountLevel").innerText = currentAccount;
+  localStorage.setItem("accountLevel", currentAccount);
+  updateFeatureAccess();
+}
+
+function updateFeatureAccess() {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach(card => {
+    if (card.classList.contains("creator-only")) {
+      card.style.display = (currentAccount === "创世神账号") ? "block" : "none";
+    } else if (card.classList.contains("svip-only")) {
+      card.style.display = (currentAccount === "天使账号") ? "none" : "block";
+    } else {
+      card.style.display = "block";
+    }
+  });
+
+  const label = document.getElementById("accountLevel");
+  if (label) label.innerText = currentAccount;
+}
+
+window.onload = () => {
+  document.getElementById("noteArea").value = localStorage.getItem("myNote") || "";
+  currentAccount = localStorage.getItem("accountLevel") || "天使账号";
+  updateFeatureAccess();
+};
 </script>
 </body>
 </html>
