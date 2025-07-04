@@ -3,22 +3,127 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
-<title>AI工具网页 - 精简增强版</title>
+<title>
+   AI工具网页 - 精简增强版
+  </title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <style>
-    body {
-      margin: 0;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #121212; /* 主色：深黑背景 */
-      color: #f5f5f5;
+   /* 滚动条美化 - 高级科技感 */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #00f2fe, #4facfe, #00f2fe);
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0,242,254,0.6);
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.15), transparent),
+              radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.15), transparent);
+  animation: bgMove 20s linear infinite;
+  z-index: -1;
+}
+@keyframes bgMove {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-10px, 10px); }
+  100% { transform: translate(0, 0); }
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  background-attachment: fixed;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+button {
+  border-radius: 14px;
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0, 242, 254, 0.25);
+  transition: all 0.3s ease;
+}
+button:hover {
+  background: linear-gradient(135deg, #00f2fe, #4facfe);
+  box-shadow: 0 0 8px rgba(0, 242, 254, 0.35), 0 0 0 2px rgba(0, 242, 254, 0.15);
+  filter: brightness(1.03);
+}
+
+
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: moveGrid 30s linear infinite;
+  z-index: -2;
+}
+@keyframes moveGrid {
+  from { transform: translate(0,0); }
+  to { transform: translate(100px, 100px); }
+}
+
+
+.bottom-nav a {
+  transition: all 0.3s ease;
+}
+.bottom-nav a.active {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+}
+
+
+
+
+@keyframes haloSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+
+.vip-label {
+  color: #ffcc00;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+  </style>
+<style>
+   body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  background-attachment: fixed;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
     .bottom-nav {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background: #2a2d3e;
+      background: rgba(30,32,50,0.85); backdrop-filter: blur(6px);
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -58,8 +163,8 @@
       background: rgba(255,255,255,0.15);
     }
     header {
-  background: #2a2d3e;
-      background: #2a2d3e;
+  background: rgba(30,32,50,0.85); backdrop-filter: blur(6px);
+      background: rgba(30,32,50,0.85); backdrop-filter: blur(6px);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -95,23 +200,81 @@
       gap: 1rem;
       margin: 1rem 0 2rem 0;
     }
-    .card {
-  background-color: #1a1a1a; /* 优化卡片深灰 */
+    
+.card {
+  background: linear-gradient(145deg, #1f2333, #2a2f45);
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  color: #e0e0f0;
+  padding: 1rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+
+.card a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+.card a:hover {
+  color: #ffdd57;
+}
+
+
+/* 天使账号（基础卡片） */
+.card.basic-card {
+  background: linear-gradient(135deg, #3f5efb, #fc466b);
+  border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 0 10px rgba(0,0,0,0.3); color: #ffffff;
+}
+
+/* 恶魔账号（SVIP卡片） */
+.card.svip-card {
+  background: linear-gradient(135deg, #ff3cac, #784ba0);
+  box-shadow: none;
+  color: #fff;
+}
+
+/* 创世神账号 */
+.card.creator-card {
+  background: linear-gradient(135deg, #ffdd55, #ff8800);
+  box-shadow: none;
+  color: #333;
+  font-weight: bold;
+}
+
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  color: #e0e0f0; /* 优化卡片深灰 */
   color: #ffffff;
   padding: 1rem;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
 }
 .card:hover {
   transform: translateY(-4px);
 }
+
+
 .card a {
-  color: #00ccff; /* 清新蓝色链接 */
+  color: #ffffff;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.2s ease;
 }
+.card a:hover {
+  color: #ffdd57;
+}
+
     #resourceSearch {
       width: 100%;
       padding: 0.5rem;
@@ -122,9 +285,15 @@
     }
     .resource a { font-size: 1.1rem; color: #ffcc00; }
   
-.resource a { font-size: 1.1rem; color: #ffcc00; }</style>
+.resource a { font-size: 1.1rem; color: #ffcc00; }
+.vip-label {
+  color: #ffcc00;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+  </style>
 <style>
-  .login-panel {
+   .login-panel {
     padding: 2rem;
     text-align: center;
   }
@@ -144,16 +313,25 @@
     cursor: pointer;
     font-weight: bold;
   }
-  .badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: red;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    border-radius: 8px;
-  }
+  
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, rgba(255,60,172,0.8), rgba(255,128,255,0.7));
+  color: white;
+  font-size: 0.6rem;
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-weight: bold;
+  box-shadow: 0 0 6px rgba(255, 60, 200, 0.4);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 10;
+}
+
+
   .svip-card {
     background: linear-gradient(135deg, #ff3cac, #784ba0);
     box-shadow: 0 0 10px #ff3cac;
@@ -164,68 +342,68 @@
     box-shadow: 0 0 15px gold;
     position: relative;
   }
-</style></head>
+
+.vip-label {
+  color: #ffcc00;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+  </style>
+<style>
+   .card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(0,0,0,0.3);
+}
+.section-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-left: 0.5rem;
+  border-left: 4px solid #00f2fe;
+  margin-bottom: 0.6rem;
+}
+
+.vip-label {
+  color: #ffcc00;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+  </style>
+</head>
 <body>
-<div class="page-content"></div> <!-- end page-content -->
+<div class="page-content">
+</div>
+<!-- end page-content -->
 <footer class="bottom-nav">
-<a onclick="showSection('home')">首页</a>
-<a onclick="showSection('functions')">功能</a>
-<a onclick="showSection('videos')">影视</a>
-<a onclick="showSection('resources')">资源</a>
-<a onclick="showSection('notes')">我的</a>
+<a onclick="showSection('home')">
+    首页
+   </a>
+<a onclick="showSection('functions')">
+    功能
+   </a>
+<a onclick="showSection('videos')">
+    影视
+   </a>
+<a onclick="showSection('resources')">
+    资源
+   </a>
+<a onclick="showSection('notes')">
+    我的
+   </a>
 </footer>
 <div class="section active" id="home">
-<div style="margin: 2rem 0; text-align: center;">
-<div class="vip-card">
-<div class="sparkle">✨</div>
-        👑 至尊永久会员 👑<br/>
-<span style="font-size: 0.9rem;">尊贵身份 · 永久有效</span>
-</div>
-</div>
-<div style="text-align: center; margin-top: 1rem;">
-<button onclick="smartBookmark()" style="
-        background: linear-gradient(45deg, gold, orange);
-        border: none;
-        border-radius: 10px;
-        padding: 0.6rem 1.5rem;
-        font-size: 1rem;
-        font-weight: bold;
-        color: black;
-        cursor: pointer;
-        box-shadow: 0 0 10px gold;
-      ">⭐ 收藏本站</button>
-<div id="updateNotice" style="
-  margin-top: 1.5rem;
-  background: linear-gradient(45deg, #ff6600, #ffaa00);
-  color: black;
-  padding: 1rem;
-  border-radius: 12px;
-  font-weight: bold;
-  box-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
-  text-align: center;
-">
-📢 功能更新：新增 账号登录功能、区域的划分、支持自动收藏提示等功能，功能持续更新中，欢迎体验！
-</div>
-</div>
-<script>
-      function addBookmark() {
-        const url = window.location.href;
-        const title = document.title;
-        try {
-          if (window.sidebar && window.sidebar.addPanel) {
-            window.sidebar.addPanel(title, url, "");
-          } else if (window.external && ("AddFavorite" in window.external)) {
-            window.external.AddFavorite(url, title);
-          } else {
-            alert("请使用 Ctrl+D (或 ⌘+D) 将本站添加到收藏夹！");
-          }
-        } catch (e) {
-          alert("您的浏览器不支持自动收藏，请手动按 Ctrl+D 收藏本站。");
-        }
-      }
-    </script>
+<div style="max-width: 640px; margin: 6rem auto; padding: 2rem 2.5rem; background: linear-gradient(145deg, rgba(0,255,255,0.06), rgba(255,255,255,0.02)); border-radius: 18px; text-align: center; font-size: 1.25rem; line-height: 1.8rem; color: #e0f7ff; font-weight: 500; font-family: 'Segoe UI','HarmonyOS Sans','Microsoft YaHei',sans-serif; box-shadow: 0 0 18px rgba(0,255,255,0.1), inset 0 0 6px rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08);">「首页模块暂未启用」
+请通过底部导航，进入功能区探索更多内容。</div></div>
 <style>
-      .vip-card {
+   .vip-card {
         display: inline-block;
         background: linear-gradient(135deg, #ffd700, #ffa500);
         color: #000;
@@ -236,121 +414,358 @@
         box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
         border: 2px solid #fff700;
         position: relative;
-        animation: glow 2s infinite alternate;
+        
       }
-      .vip-card .sparkle {
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        font-size: 2rem;
-        animation: rotate 2s linear infinite;
-      }
-      @keyframes glow {
-        0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
-        100% { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
-      }
-      @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
-    </style>
-</div>
+      .vip-card 
+to {
+    transform: scale(1.2);
+    opacity: 1;
+    text-shadow: 0 0 10px gold, 0 0 20px orange, 0 0 30px red;
+  }
+}
+    
+      
+      
+    
+/* 美化滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffcc00, #ff6600);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+/* 弹出提示框样式 */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 215, 0, 0.95);
+  color: black;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 12px rgba(255, 200, 0, 0.8);
+  z-index: 2000;
+  animation: fadeInOut 3s ease-in-out;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 20px); }
+}
+
+/* 炫彩光标 */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  background-attachment: fixed;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+
+}
+
+
+
+
+
+.vip-label {
+  color: #ffcc00;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.card a {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.card a:hover {
+  background: rgba(255, 221, 87, 0.25);
+  color: #ffdd57;
+  box-shadow: 0 0 6px rgba(255, 221, 87, 0.4);
+}
+  </style>
 <div class="section" id="functions">
-<h2>🛠️ 功能区</h2>
+<h2>
+    🛠️ 功能区
+   </h2>
 <div class="grid searchable">
 <!-- 新添加的功能区 -->
-<div class="card">
-<div>万能链接解析下载神器</div>
-<a href="https://snapany.com/zh" target="_blank">点击进入</a>
+<div class="card" onclick="window.open('https://snapany.com/zh', '_blank')" style=" cursor:pointer">
+<div>
+      万能链接解析下载神器
+     </div>
 </div>
-<div class="card svip-only svip-card">
-<div>高级AI特权工具 <span class="badge">SVIP</span></div>
-<a href="https://www.example.com" target="_blank">点击进入</a>
+<div class="card creator-only creator-card" onclick="window.open('https://www.example.com', '_blank')" style=" cursor:pointer">
+<div>
+      👑 创世神专属工具
+     </div>
 </div>
-<div class="card creator-only creator-card">
-<div>👑 创世神专属工具</div>
-<a href="https://www.example.com" target="_blank">点击进入</a>
+<div class="card svip-only svip-card" onclick="window.open('https://chatgpt.com/g/g-68622dc8cab481919ef3289e1763d3de-zhuan-shu-aizhu-li', '_blank')" style=" cursor:pointer">
+<div>
+      个人信息画像智能体
+      <span class="badge">
+       SVIP
+      </span>
 </div>
 </div>
-<h2>🌐 网页区</h2>
+</div>
+<h2>
+    🌐 网页区
+   </h2>
 <div class="grid searchable">
-<div class="card">
-<div>开拍</div>
-<a href="https://www.kaipai.com/home" target="_blank">点击进入</a>
-</div><div class="card">
-<div>百度网盘</div>
-<a href="https://pan.baidu.com/" target="_blank">点击进入</a>
-</div><div class="card">
-<div>ChatGPT网页版</div>
-<a href="https://chat.openai.com" target="_blank">点击进入</a>
-</div><div class="card">
-<div>即梦 AI 绘画</div>
-<a href="https://jimeng.jianying.com/" target="_blank">点击进入</a>
-</div></div>
+<div class="card" onclick="window.open('https://www.kaipai.com/home', '_blank')" style=" cursor:pointer">
+<div>
+      开拍
+     </div>
+</div>
+<div class="card" onclick="window.open('https://pan.baidu.com/', '_blank')" style=" cursor:pointer">
+<div>
+      百度网盘
+     </div>
+</div>
+<div class="card" onclick="window.open('https://jimeng.jianying.com/', '_blank')" style=" cursor:pointer">
+<div>
+      即梦 AI 绘画
+     </div>
+</div>
+<div class="card svip-only svip-card" onclick="window.open('https://chat.openai.com', '_blank')" style=" cursor:pointer">
+<div>
+      ChatGPT
+      <span class="badge">
+       SVIP
+      </span>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="videos">
-<h2>📽️ 影视平台</h2>
+<h2>
+    📽️ 影视平台
+   </h2>
 <div class="grid searchable">
-<div class="card"><div>腾讯视频</div><a href="https://v.qq.com" target="_blank">点击进入</a></div>
-<div class="card"><div>爱奇艺</div><a href="https://www.iqiyi.com" target="_blank">点击进入</a></div>
-<div class="card"><div>优酷</div><a href="https://www.youku.com" target="_blank">点击进入</a></div>
-<div class="card"><div>哔哩哔哩</div><a href="https://www.bilibili.com" target="_blank">点击进入</a></div>
-<div class="card"><div>芒果TV</div><a href="https://www.mgtv.com" target="_blank">点击进入</a></div>
-<div class="card"><div>搜狐视频</div><a href="https://tv.sohu.com" target="_blank">点击进入</a></div>
-<div class="card"><div>PPTV</div><a href="https://www.pptv.com" target="_blank">点击进入</a></div>
+<div class="card" onclick="window.open('https://v.qq.com', '_blank')" style=" cursor:pointer">
+<div>
+      腾讯视频
+     </div>
 </div>
-<h2>🎬 短视频平台</h2>
+<div class="card" onclick="window.open('https://www.iqiyi.com', '_blank')" style=" cursor:pointer">
+<div>
+      爱奇艺
+     </div>
+</div>
+<div class="card" onclick="window.open('https://www.youku.com', '_blank')" style=" cursor:pointer">
+<div>
+      优酷
+     </div>
+</div>
+<div class="card" onclick="window.open('https://www.bilibili.com', '_blank')" style=" cursor:pointer">
+<div>
+      哔哩哔哩
+     </div>
+</div>
+<div class="card" onclick="window.open('https://www.mgtv.com', '_blank')" style=" cursor:pointer">
+<div>
+      芒果TV
+     </div>
+</div>
+<div class="card" onclick="window.open('https://tv.sohu.com', '_blank')" style=" cursor:pointer">
+<div>
+      搜狐视频
+     </div>
+</div>
+<div class="card" onclick="window.open('https://www.pptv.com', '_blank')" style=" cursor:pointer">
+<div>
+      PPTV
+     </div>
+</div>
+</div>
+<h2>
+    🎬 短视频平台
+   </h2>
 <div class="grid searchable">
-<div class="card"><div>抖音</div><a href="https://www.douyin.com" target="_blank">点击进入</a></div>
-<div class="card"><div>快手</div><a href="https://www.kuaishou.com" target="_blank">点击进入</a></div>
-<div class="card"><div>小红书</div><a href="https://www.xiaohongshu.com" target="_blank">点击进入</a></div>
+<div class="card" onclick="window.open('https://www.douyin.com', '_blank')" style=" cursor:pointer">
+<div>
+      抖音
+     </div>
 </div>
-<h2>🎥 短视频创作者中心</h2>
+<div class="card" onclick="window.open('https://www.kuaishou.com', '_blank')" style=" cursor:pointer">
+<div>
+      快手
+     </div>
+</div>
+<div class="card" onclick="window.open('https://www.xiaohongshu.com', '_blank')" style=" cursor:pointer">
+<div>
+      小红书
+     </div>
+</div>
+<div class="card" onclick="window.open('https://www.bilibili.com', '_blank')" style=" cursor:pointer">
+<div>
+      B站
+     </div>
+</div>
+<div class="card svip-only svip-card" onclick="window.open('https://www.youtube.com/', '_blank')" style=" cursor:pointer">
+<div>
+      YouTube
+      <span class="badge">
+       SVIP
+      </span>
+</div>
+</div>
+</div>
+<h2>
+    🎥 短视频创作者中心
+   </h2>
 <div class="grid searchable">
-<div class="card"><div>抖音创作者中心</div><a href="https://creator.douyin.com" target="_blank">点击进入</a></div>
-<div class="card"><div>视频号助手</div><a href="https://channels.weixin.qq.com" target="_blank">点击进入</a></div>
-<div class="card"><div>小红书创作服务平台</div><a href="https://creator.xiaohongshu.com" target="_blank">点击进入</a></div>
-<div class="card"><div>快手创作者服务平台</div><a href="https://cp.kuaishou.com/profile" target="_blank">点击进入</a></div>
+<div class="card" onclick="window.open('https://www.douyin.com', '_blank')" style=" cursor:pointer">
+<div>
+      抖音创作者中心
+     </div>
+</div>
+<div class="card" onclick="window.open('https://channels.weixin.qq.com', '_blank')" style=" cursor:pointer">
+<div>
+      视频号助手
+     </div>
+</div>
+<div class="card" onclick="window.open('https://www.xiaohongshu.com', '_blank')" style=" cursor:pointer">
+<div>
+      小红书创作服务平台
+     </div>
+</div>
+<div class="card" onclick="window.open('https://www.kuaishou.com', '_blank')" style=" cursor:pointer">
+<div>
+      快手创作者服务平台
+     </div>
 </div>
 </div>
-<div class="section" id="resources">
-<h2>📁 资源</h2>
+</div>
+<div class="section" id="resources" style=" padding-bottom: 6rem;">
+<h2>
+    📁 资源
+   </h2>
 <input id="resourceSearch" oninput="filterResources()" placeholder="搜索你的资源关键词..." type="text"/>
 <ul id="resourceList">
-<li class="resource"><a href="https://app.1foo.com/install/10AD56" target="_blank">1. 边界AI</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/252ee82b27e8#/list/share" target="_blank">2. 科技插件</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/bc1ac6a6bf7c#/list/share" target="_blank">3. 安卓软件</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">4. 摄影剪辑</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">5. 媒体运营</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">6. 去马赛克</a></li><li class="resource"><a href="https://github.com/799342382/mofa/releases/download/v1.0.0/mofa.apk" target="_blank">7. 本站有APP方便进入</a></li>
-<li class="resource"><a href="https://kdocs.cn/l/clLbAxjyKcbr" target="_blank">8. 短剧百度搜索</a></li>
-<li class="resource"><a href="https://pan.quark.cn/s/32e2eef37133" target="_blank">9. 天当众说话</a></li><li class="resource"><a href="https://pan.quark.cn/s/bda448f2ed6a" target="_blank">10. 情绪自救课（含训练营）</a></li><li class="resource"><a href="https://pan.quark.cn/s/21d5a32c1006#/list/share" target="_blank">11. Deepseek保姆喂饭级使用技巧大全</a></li></ul>
+<li class="resource" style="margin-bottom: 0.6rem;" title="推荐：AI工具入门推荐">
+<a href="https://app.1foo.com/install/10AD56" target="_blank">
+      1. 边界AI
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/252ee82b27e8#/list/share" target="_blank">
+      2. 科技插件
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/bc1ac6a6bf7c#/list/share" target="_blank">
+      3. 安卓软件
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">
+      4. 摄影剪辑
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">
+      5. 媒体运营
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">
+      6. 去马赛克
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://github.com/799342382/mofa/releases/download/v1.0.0/mofa.apk" target="_blank">
+      7. 本站有APP方便进入
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://kdocs.cn/l/clLbAxjyKcbr" target="_blank">
+      8. 短剧百度搜索
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/32e2eef37133" target="_blank">
+      9. 天当众说话
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/bda448f2ed6a" target="_blank">
+      10. 情绪自救课（含训练营）
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/21d5a32c1006#/list/share" target="_blank">
+      11. Deepseek保姆喂饭级使用技巧大全
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/d221986cd4dc" target="_blank">
+      12. 小H书资源账号采集器(独家版)
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/615a6523ee82" target="_blank">
+      13. TV软件专区(去除收费版)
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/816184bc8287" target="_blank">
+      14. 11款可用磁力软件(资源不限速)
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/5f735ca11b35" target="_blank">
+      15. [win]数据免费恢复软件x64
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/392b2ac04a48" target="_blank">
+      16. 1DM中文版下载利器
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/53138911d722" target="_blank">
+      17. 美图秀秀(高级版，已解所有功能)
+     </a>
+</li>
+<li class="resource" style="margin-bottom: 0.6rem;">
+<a href="https://pan.quark.cn/s/6dbe95282e0b" target="_blank">
+      18. 短视频-键搬运（会员解锁版.apk）
+     </a>
+</li>
+</ul>
+<div id="noResultTip" style="display:none; color:#ffcc00; font-size:1.1rem; text-align:center;">
+    ⚠️ 没有找到相关资源～
+   </div>
 </div>
-<div class="section" id="notes"><div class="login-panel">
-<h2>账号管理</h2>
-<p>当前账号：<span id="accountLevel">天使账号</span></p>
-<input id="passwordInput" placeholder="输入密码切换账号" type="password"/>
-<button onclick="switchAccount()">切换账号</button>
-</div>
-<h2>📝 我的</h2>
-<textarea id="noteArea" rows="10" style="width:100%;font-size:16px;"></textarea>
-<button onclick="saveNote()">💾 保存</button>
-<button onclick="clearNote()">🗑️ 清空</button>
+<div style="text-align: center; margin-top: 1rem;">
 </div>
 <script>
-    function showSection(id) {
+   function showSection(id) {
+  document.querySelectorAll('.bottom-nav a').forEach(nav => nav.classList.remove('active'));
+  document.querySelector(`.bottom-nav a[onclick="showSection('${id}')"]`)?.classList.add('active');
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-    }
-
-    function saveNote() {
-      localStorage.setItem("myNote", document.getElementById("noteArea").value);
-      alert("已保存！");
-    }
-
-    function clearNote() {
-      document.getElementById("noteArea").value = "";
-      localStorage.removeItem("myNote");
     }
 
     function filterResources() {
@@ -361,64 +776,222 @@
     }
 
     window.onload = () => {
-      document.getElementById("noteArea").value = localStorage.getItem("myNote") || "";
-    }
+  updateFeatureAccess();
+      }
   </script>
 <script>
-  function smartBookmark() {
-    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-    if (isMobile) {
-      alert("📱 请点击浏览器菜单栏 → 选择『添加书签』或『添加到主屏幕』");
-    } else {
+   else {
       try {
-        if (window.external && ('AddFavorite' in window.external)) {
-          window.external.AddFavorite(location.href, document.title);
+        if (window.external && ('Add' in window.external)) {
+          window.external.Add(location.href, document.title);
         } else {
-          alert("💻 请按 Ctrl+D (或 ⌘+D) 将本站添加到收藏夹");
+          
         }
       } catch (e) {
-        alert("💻 请按 Ctrl+D (或 ⌘+D) 将本站添加到收藏夹");
+        
       }
     }
   }
-</script><script>
-let currentAccount = localStorage.getItem("accountLevel") || "天使账号";
+  </script>
+<div class="section" id="notes">
+<div class="panel" style="max-width: 520px; margin: 2.5rem auto; padding: 1.8rem; background: linear-gradient(145deg, #1e2338, #2c334c); border-radius: 18px; box-shadow: 0 0 16px rgba(0,0,0,0.4); color: #fff;">
+<div style="font-size: 1.4rem; font-weight: bold; margin-bottom: 0.8rem; color: #00ccff;">
+     👤 我的账号
+    </div>
+<div style="font-size: 1rem; margin-bottom: 1rem;">
+     当前账号：
+     <span id="accountLevel">
+      天使账号
+     </span>
+<span class="vip-label">
+      (永久会员)
+     </span>
+</div>
+<div style="display: flex; gap: 0.5rem;">
+<input id="passwordInput" placeholder="输入密码切换账号" style="flex:1; padding: 0.5rem; border-radius: 8px; border: none; font-size: 1rem;" type="password"/>
+<button onclick="switchAccount()" style="padding: 0.5rem 1.2rem; font-size: 1rem; border-radius: 8px; background: gold; border: none; font-weight: bold; color: black;">
+      切换账号
+     </button>
+</div>
+</div>
+<div id="copyQQ" onclick="copyQQ()" style="max-width: 520px; margin: 1.5rem auto; padding: 1.5rem; background: linear-gradient(145deg, #1e1f2a, #2c2e3f); border-radius: 14px; box-shadow: 0 0 14px rgba(0,0,0,0.3); color: #fff; text-align:center; font-size: 1rem; cursor: pointer;">
+    👨‍💻 作者联系QQ：799342382（点击复制）
+   </div>
+</div>
+<script>
+   }
 
-function switchAccount() {
-  const pwd = document.getElementById("passwordInput").value;
-  if (pwd === "520131419") {
-    currentAccount = "恶魔账号";
-  } else if (pwd === "15934345873") {
-    currentAccount = "创世神账号";
-  } else {
-    currentAccount = "天使账号";
-  }
-  document.getElementById("accountLevel").innerText = currentAccount;
-  localStorage.setItem("accountLevel", currentAccount);
-  updateFeatureAccess();
+// 渲染卡片到首页
+);
 }
 
-function updateFeatureAccess() {
-  const cards = document.querySelectorAll(".card");
-  cards.forEach(card => {
-    if (card.classList.contains("creator-only")) {
-      card.style.display = (currentAccount === "创世神账号") ? "block" : "none";
-    } else if (card.classList.contains("svip-only")) {
-      card.style.display = (currentAccount === "天使账号") ? "none" : "block";
+// 没有匹配项时显示提示
+function filterResources() {
+  let keyword = document.getElementById("resourceSearch").value.toLowerCase();
+  let found = false;
+  document.querySelectorAll(".resource").forEach(item => {
+    const visible = item.innerText.toLowerCase().includes(keyword);
+    item.style.display = visible ? "list-item" : "none";
+    if (visible) found = true;
+  });
+  const tip = document.getElementById("noResultTip");
+  if (tip) tip.style.display = found ? "none" : "block";
+  highlightKeywords();
+}
+
+window.onload = () => {
+  updateFeatureAccess();
+  
+};
+  </script>
+<script>
+   // 1. 禁用右键菜单
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// 2. 屏蔽常见快捷键
+document.addEventListener('keydown', function (e) {
+  if (
+    e.key === 'F12' || 
+    (e.ctrlKey && e.shiftKey && ['I', 'C', 'J'].includes(e.key.toUpperCase())) ||
+    (e.ctrlKey && e.key.toUpperCase() === 'U')
+  ) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// 3. 控制台尺寸检测
+(function() {
+  const threshold = 160;
+  setInterval(function () {
+    const devtoolsOpen = window.outerWidth - window.innerWidth > threshold || 
+                         window.outerHeight - window.innerHeight > threshold;
+    if (devtoolsOpen) {
+      window.location.href = "about:blank";
+    }
+  }, 500);
+})();
+
+// 4. 调用 debugger 死循环干扰调试器
+(function blockDebug() {
+  function detectDebugger() {
+    setInterval(function () {
+      const start = new Date();
+      debugger;
+      const end = new Date();
+      if (end - start > 100) {
+        window.location.href = "about:blank";
+      }
+    }, 200);
+  }
+  try {
+    detectDebugger();
+  } catch (e) {}
+})();
+
+// 5. 控制台日志警告（吸引注意，反劝开发者）
+setTimeout(() => {
+  if (window.console) {
+    try {
+      console.log("%c警告：请勿尝试调试或复制本站内容，已启用防护机制", "color:red;font-size:20px;font-weight:bold;");
+    } catch (e) {}
+  }
+}, 1000);
+  </script>
+<script>
+   function updateFeatureAccess() {
+  const accountLevel = document.getElementById("accountLevel")?.textContent || "";
+
+  document.querySelectorAll(".svip-only").forEach(card => {
+    if (!accountLevel.includes("恶魔") && !accountLevel.includes("SVIP") && !accountLevel.includes("创世神")) {
+      card.style.display = "none";
     } else {
       card.style.display = "block";
     }
   });
 
-  const label = document.getElementById("accountLevel");
-  if (label) label.innerText = currentAccount;
+  document.querySelectorAll(".creator-only").forEach(card => {
+    if (!accountLevel.includes("创世神")) {
+      card.style.display = "none";
+    } else {
+      card.style.display = "block";
+    }
+  });
+}
+  </script>
+<script>
+   function switchAccount() {
+  const input = document.getElementById("passwordInput").value;
+  let levelText = "";
+
+  if (input === "520131419") {
+    levelText = "恶魔账号";
+    showToast("成功切换为恶魔账号");
+  } else if (input === "15934345873") {
+    levelText = "创世神账号";
+    showToast("成功切换为创世神账号");
+  } else {
+    levelText = "天使账号";
+    showToast("❌ 密码错误，已切换为天使账号");
+    document.getElementById("passwordInput").value = "";
+    document.getElementById("passwordInput").focus();
+  }
+
+  document.getElementById("accountLevel").textContent = levelText;
+  localStorage.setItem("accountLevel", levelText);
+  updateFeatureAccess();
+}
+
+function showToast(text) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+  toast.innerText = text;
+  toast.style.display = "block";
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 3000);
 }
 
 window.onload = () => {
-  document.getElementById("noteArea").value = localStorage.getItem("myNote") || "";
-  currentAccount = localStorage.getItem("accountLevel") || "天使账号";
   updateFeatureAccess();
+
+  const saved = localStorage.getItem("accountLevel");
+  if (saved) {
+    document.getElementById("accountLevel").textContent = saved;
+    updateFeatureAccess();
+  }
+
+  const input = document.getElementById("passwordInput");
+  if (input) {
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        switchAccount();
+      }
+    });
+  }
 };
-</script>
+  </script>
+<div class="toast" id="toast" style="display: none;">
+</div>
+<script>
+   function copyQQ() {
+  const qq = "799342382";
+  navigator.clipboard.writeText(qq).then(() => {
+    const card = document.getElementById("copyQQ");
+    if (card) {
+      card.style.transition = "transform 0.3s, background 0.3s";
+      card.style.transform = "scale(1.05)";
+      card.style.background = "linear-gradient(145deg, #2a2f45, #38405b)";
+      setTimeout(() => {
+        card.style.transform = "scale(1)";
+        card.style.background = "linear-gradient(145deg, #1e1f2a, #2c2e3f)";
+      }, 400);
+    }
+    showToast("QQ号已复制到剪贴板");
+  }).catch(err => {
+    alert("复制失败：" + err);
+  });
+}
+  </script>
 </body>
 </html>
