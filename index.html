@@ -727,7 +727,36 @@ h2::after {
   }
 }
 </style>
-</head>
+<style>
+.popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup-content {
+  background: #1e253c;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  color: #fff;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.close-btn {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+</style></head>
 <body>
 <div class="page-content">
 <!-- 首页 -->
@@ -777,6 +806,16 @@ h2::after {
 </div>
 <!-- 影视区 -->
 <div class="section" id="videos">
+
+<h2>🎓 学习专区</h2>
+<div class="grid searchable">
+<div class="card" onclick="window.open('https://open.163.com', '_blank')">
+<div>网易公开课</div>
+</div>
+<div class="card svip-only svip-card" onclick="window.open('https://www.icourse163.org', '_blank')">
+<div>MOOC大学<span class="badge">SVIP</span></div>
+</div>
+</div>
 <h2>📽️ 影视平台</h2>
 <div class="grid searchable">
 <div class="card" onclick="window.open('https://v.qq.com', '_blank')">
@@ -846,7 +885,7 @@ h2::after {
 <li class="resource"><a href="https://pan.quark.cn/s/bea1bfe13110#/list/share" target="_blank">4. 摄影剪辑</a></li>
 <li class="resource"><a href="https://pan.quark.cn/s/e735122148d6#/list/share" target="_blank">5. 媒体运营</a></li>
 <li class="resource"><a href="https://pan.quark.cn/s/8b0c13bb29c9" target="_blank">6. 去马赛克</a></li>
-<li class="resource"><a href="https://github.com/799342382/mofa/releases/download/v1.0.0/mofa.apk" target="_blank">7. 本站有APP方便进入</a></li>
+<li class="resource"><a href="https://github.com/799342382/aishenqi-apk/releases/download/v7.8/AI.apk" target="_blank">7. 本站有APP方便进入</a></li>
 <li class="resource"><a href="https://kdocs.cn/l/clLbAxjyKcbr" target="_blank">8. 短剧百度搜索</a></li>
 <li class="resource"><a href="https://pan.quark.cn/s/32e2eef37133" target="_blank">9. 天当众说话</a></li>
 <li class="resource"><a href="https://pan.quark.cn/s/bda448f2ed6a" target="_blank">10. 情绪自救课（含训练营）</a></li>
@@ -874,15 +913,9 @@ h2::after {
 <button onclick="switchAccount()">切换账号</button>
 </div>
 </div>
-<div class="action-btn" id="copyLinkBtn">
-      🚪 网页版入口（点击复制）
-    </div>
-<div class="action-btn" id="copyQQ">
-      👨‍💻 作者联系（点击复制）
-    </div>
-<div class="action-btn" id="showDisclaimer">
-      📜 功能声明（点击查看）
-    </div>
+<div class="action-btn" id="copyLinkBtn">💻 PC端入口（点击复制）</div><div class="action-btn" id="mobileAppDownloadBtn" onclick="window.open('https://github.com/799342382/aishenqi-apk/releases/download/v7.8/AI.apk', '_blank')" style="cursor:pointer">📱 移动端入口（点击下载）</div>
+<div class="action-btn" id="copyQQ">👨‍💻 作者联系（点击复制）</div>
+<div class="action-btn" id="showDisclaimer">📜 功能声明（点击查看）</div>
 <!-- 功能声明弹窗 -->
 <div id="disclaimerContent">
 <div id="closeDisclaimer">✖</div>
@@ -973,7 +1006,7 @@ h2::after {
 <p>本声明适用于所有平台用户，最终解释权归AI工具平台所有</p>
 </div>
 </div>
-</div>
+<div class="action-btn" onclick="showFAQPopup()">❓ 常见问题（点击查看）</div></div>
 </div>
 <!-- 底部导航 -->
 <footer class="bottom-nav">
@@ -1056,7 +1089,7 @@ function showToast(text) {
 function copyLink() {
   const link = "https://bit.ly/4lAqC7R";
   navigator.clipboard.writeText(link).then(() => {
-    showToast("网页版入口链接已复制到剪贴板");
+    showToast("PC端入口链接已复制到剪贴板");
   }).catch(err => {
     showToast("复制失败，请手动复制");
   });
@@ -1173,5 +1206,119 @@ document.addEventListener('copy', function (e) {
 });
 Object.defineProperty(navigator, 'webdriver', { get: () => false }); // 防止被脚本控制
 </script>
+<div class="popup" id="faqPopup" style="display:none;">
+<div class="popup-content">
+<span class="close-btn" onclick="hideFAQPopup()">×</span>
+<h2 style="color:#00ccff;">✅ 常见问题</h2>
+<div style="margin-top:1rem;">
+<p><strong style="color:#ffd700;">问题1：</strong> 点击后为什么没有反应？</p>
+<p><strong>答：</strong> 部分功能涉及网络请求或平台加载，需要 <strong>2～5秒</strong> 的响应时间，请耐心等待系统加载完成。</p>
+</div>
+<div style="margin-top:1rem;">
+<p><strong style="color:#ffd700;">问题2：</strong> 页面显示“数据获取失败”或出现空白？</p>
+<p><strong>答：</strong> 通常是网络连接不稳定造成的。建议：</p>
+<ul style="margin-left:1.2rem;">
+<li>刷新页面；</li>
+<li>点击空白区域重新加载；</li>
+<li>切换 Wi-Fi 或更稳定的网络重试。</li>
+</ul>
+</div>
+<div style="margin-top:1rem;">
+<p><strong style="color:#ffd700;">问题3：</strong> 手机端打开界面显示不完整，按钮看不到？</p>
+<p><strong>答：</strong> 可能是浏览器兼容问题。建议：</p>
+<ul style="margin-left:1.2rem;">
+<li>切换为横屏模式；</li>
+<li>尝试缩放调整；</li>
+<li>使用 Chrome、Edge、夸克等浏览器。</li>
+</ul>
+</div>
+</div>
+</div>
+<script>
+function showFAQPopup() {
+  document.getElementById('faqPopup').style.display = 'flex';
+}
+function hideFAQPopup() {
+  document.getElementById('faqPopup').style.display = 'none';
+}
+</script>
+<!-- 右下角展开按钮组，仅在资源页显示 -->
+<div id="scrollButtons" style="display: none;">
+  <button id="toggleScrollMenu" onclick="toggleScrollMenu()">☰</button>
+  <div id="scrollActions" style="display: none; flex-direction: column; gap: 10px; margin-bottom: 10px;">
+    <button onclick="scrollToTop()" title="回到顶部">↑</button>
+    <button onclick="scrollToBottom()" title="跳到底部">↓</button>
+  </div>
+</div>
+
+<style>
+#scrollButtons {
+  position: fixed;
+  bottom: 90px;
+  right: 16px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  z-index: 9999;
+}
+
+#scrollButtons button {
+  background: linear-gradient(135deg, #00f2fe, #4facfe);
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 15px rgba(0, 200, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  opacity: 0.85;
+}
+
+#scrollButtons button:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+#toggleScrollMenu {
+  font-size: 20px;
+  padding: 14px;
+  background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+}
+</style>
+
+<script>
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function scrollToBottom() {
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function toggleScrollMenu() {
+  const actions = document.getElementById("scrollActions");
+  actions.style.display = actions.style.display === "none" ? "flex" : "none";
+}
+
+function updateScrollButtonVisibility() {
+  const scrollBtn = document.getElementById("scrollButtons");
+  const isResourcesActive = document.getElementById("resources").classList.contains("active");
+  scrollBtn.style.display = isResourcesActive ? "flex" : "none";
+}
+
+const originalShowSection = window.showSection;
+window.showSection = function(id) {
+  originalShowSection(id);
+  setTimeout(updateScrollButtonVisibility, 100);
+};
+
+window.addEventListener("DOMContentLoaded", function () {
+  updateScrollButtonVisibility();
+});
+</script>
+
 </body>
 </html>
